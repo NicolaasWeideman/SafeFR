@@ -52,7 +52,7 @@ def main():  # pragma: no cover
             print(f"Could not find sequence {search_hex:}")
         elif len(offsets) == 1:
             print(f"Found one occurrence of sequence {search_hex:}")
-            update_file(file_path, data, search, replace)
+            update_file(file_path, data, search, prefix + replace + suffix)
         else:
             print(f"Found multiple occurrences of sequence {search_hex:}")
             print("Choose one of the following unique contexts.")
