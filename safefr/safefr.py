@@ -55,15 +55,17 @@ def main():  # pragma: no cover
             update_file(file_path, data, search, prefix + replace + suffix)
         else:
             print(f"Found multiple occurrences of sequence {search_hex:}")
-            print("Choose one of the following unique contexts.")
-            for context_pre, search, context_post in find_unique_contexts(
-                data, offsets, prefix, find, suffix
+            print(
+                "Identify the correct occurrence by its context, listed below, and re-run."
+            )
+            for i, (context_pre, search, context_post) in enumerate(
+                find_unique_contexts(data, offsets, prefix, find, suffix)
             ):
                 context_pre_hex = binascii.hexlify(context_pre).decode("ascii")
                 search_hex = binascii.hexlify(search).decode("ascii")
                 context_post_hex = binascii.hexlify(context_post).decode("ascii")
                 print(
-                    f"{context_pre_hex:}/{search_hex:}/{replace_hex:}/{context_post_hex:}"
+                    f"{i:2}: {context_pre_hex:}/{search_hex:}/{replace_hex:}/{context_post_hex:}"
                 )
 
 
@@ -158,18 +160,12 @@ def find_unique_contexts(data, offsets, prefix, find, suffix):
         context_pre_i = completed_pre_offsets[o]
         context_post_i = completed_post_offsets[o]
         context_pre = data[o - context_pre_i : o + len(prefix)]
-        context_pre_hex = binascii.hexlify(context_pre).decode("ascii")
         search = data[o + len(prefix) : o + len(prefix) + len(find)]
-        search_hex = binascii.hexlify(search).decode("ascii")
         context_post = data[
             o + len(prefix) + len(find) : o + len(prefix) + len(find) + context_post_i
         ]
-        context_post_hex = binascii.hexlify(context_post).decode("ascii")
         assert (context_pre, search, context_post) not in contexts
         contexts.add((context_pre, search, context_post))
-        print(
-            f"offset: {o:3} pre: {context_pre_i:3} post: {context_post_i:3}: {context_pre_hex:}/{search_hex:}/{context_post_hex:}"
-        )
         assert (
             len(
                 find_all_occurrences(
@@ -186,7 +182,6 @@ def find_all_occurrences(data, search):
     offsets = []
     while offset != -1:
         offsets.append(offset)
-        # print(offset, data[offset:])
         offset = data.find(search, offset + 1)
     return offsets
 
