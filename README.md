@@ -11,5 +11,5 @@ python3 -m pip install .
 
 ## Run Test Cases
 ```sh
-python3 -m pytest ./test/test.py
+python3 -m pytest ./test/test_safefr.py
 ```
