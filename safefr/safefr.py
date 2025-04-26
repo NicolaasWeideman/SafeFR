@@ -7,7 +7,7 @@ from collections import defaultdict
 
 def main():  # pragma: no cover
     parser = argparse.ArgumentParser(
-        description="Binary Find & Replace: find and replace a unique hexadecimal byte sequence in a binary file."
+        description="Safe Find & Replace: find and replace a unique hexadecimal byte sequence in a file."
     )
     parser.add_argument(
         "sequence",

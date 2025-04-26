@@ -1,4 +1,4 @@
-from binfr.binfr import find_all_occurrences, find_unique_contexts
+from safefr.safefr import find_all_occurrences, find_unique_contexts
 from test_data import find_all_occurrences_test_data, find_unique_context_test_data
 import pytest
 

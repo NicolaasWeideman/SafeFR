@@ -1,5 +1,5 @@
-# BinFR
-Binary Find &amp; Replace: Find and replace a unique hexadecimal sequence in a binary file.
+# SafeFR
+Safe Find &amp; Replace: Find and replace a unique hexadecimal sequence in a file.
 
 ## Run Test Cases
 ```sh
