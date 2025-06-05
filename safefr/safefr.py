@@ -27,10 +27,10 @@ def main():  # pragma: no cover
         print("Your sequence does not match the expected format")
         return
 
-    prefix_hex = m.group("prefix")
-    find_hex = m.group("find")
-    replace_hex = m.group("replace")
-    suffix_hex = m.group("suffix")
+    prefix_hex = re.sub(r"\s", "", m.group("prefix"))
+    find_hex = re.sub(r"\s", "", m.group("find"))
+    replace_hex = re.sub(r"\s", "", m.group("replace"))
+    suffix_hex = re.sub(r"\s", "", m.group("suffix"))
 
     prefix = bytes.fromhex(prefix_hex) if len(prefix_hex) else b""
     find = bytes.fromhex(find_hex) if len(find_hex) else b""
