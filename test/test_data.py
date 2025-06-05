@@ -3,6 +3,7 @@ find_all_occurrences_test_data = [
     #[data, search, [expected, ...],
     [b"0", b"0", [0]],
     [b"0", b"1", []],
+[b"10", b"0", [1]],
 [b"00", b"0", [0,1]],
 [b"010", b"0", [0,2]],
 [b"000", b"00", [0,1]],
