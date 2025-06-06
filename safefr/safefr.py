@@ -59,14 +59,17 @@ def main():  # pragma: no cover
             print(
                 "Identify the correct occurrence by its context, listed below, and re-run."
             )
+            contexts = find_unique_contexts(data, offsets, prefix, find, suffix)
+            max_pre = max(len(c[0]) for c in contexts)
+
             for i, (context_pre, search, context_post) in enumerate(
-                find_unique_contexts(data, offsets, prefix, find, suffix)
+                sorted(contexts, key=lambda s: s[0])
             ):
                 context_pre_hex = binascii.hexlify(context_pre).decode("ascii")
                 search_hex = binascii.hexlify(search).decode("ascii")
                 context_post_hex = binascii.hexlify(context_post).decode("ascii")
                 print(
-                    f"{i:2}: {context_pre_hex:}/{search_hex:}/{replace_hex:}/{context_post_hex:}"
+                    f"{i:2}: {context_pre_hex: >{max_pre * 2}}/{search_hex:}/{replace_hex:}/{context_post_hex:}"
                 )
 
 
