@@ -63,7 +63,7 @@ def main():  # pragma: no cover
             max_pre = max(len(c[0]) for c in contexts)
 
             for i, (context_pre, search, context_post) in enumerate(
-                sorted(contexts, key=lambda s: s[0])
+                sorted(contexts, key=lambda s: bytes(reversed(s[0])))
             ):
                 context_pre_hex = binascii.hexlify(context_pre).decode("ascii")
                 search_hex = binascii.hexlify(search).decode("ascii")
