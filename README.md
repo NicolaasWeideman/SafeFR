@@ -1,6 +1,6 @@
 # SafeFR
-Safe Find &amp; Replace: Find and replace a unique hexadecimal sequence in a file.
-If the provided hexadecimal sequence is not unique (there are multiple occurrences), SafeFR identifies a unique context around each occurrences.
+Safe Find &amp; Replace: Find and replace a unique byte sequence in a file.
+If the provided byte sequence is not unique (there are multiple occurrences), SafeFR identifies a unique context around each occurrences.
 
 ## Install
 ```sh
