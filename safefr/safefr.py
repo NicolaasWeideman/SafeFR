@@ -78,7 +78,7 @@ def update_file(file_path, data, search, replace):
     file_basename = os.path.basename(file_path)
     file_name_mod = file_basename + ".mod"
     if os.path.exists(file_name_mod):
-        file_name_mod = find_uniq_filename(file_basename)
+        file_name_mod = find_uniq_filename(file_name_mod)
     with open(file_name_mod, "wb") as fd:
         print(f"Writing updated file to: {file_name_mod:}")
         fd.write(data_mod)
@@ -88,7 +88,7 @@ def find_uniq_filename(file_name):
     file_name_mod = file_name
     i = 1
     while os.path.exists(file_name_mod):
-        file_name_mod = file_name + f".mod.{i:}"
+        file_name_mod = f"{file_name:}.{i:}"
         i += 1
     return file_name_mod
 
