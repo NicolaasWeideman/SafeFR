@@ -141,7 +141,7 @@ def find_unique_contexts(data, offsets, prefix, find, suffix):
             if offs[-1] + len(search) + i >= len(data):
                 assert offs[-1] + len(search) + i == len(data)
                 # We've reached the edge, this makes this context unique
-                completed_post_offsets[offs[-1]] = len(search) + i - 1
+                completed_post_offsets[offs[-1]] = len(search) + i
                 offs.pop()
             freqs = defaultdict(list)
             for o in offs:
@@ -150,7 +150,7 @@ def find_unique_contexts(data, offsets, prefix, find, suffix):
             for freq_offs in freqs.values():
                 if len(freq_offs) == 1:
                     # If this byte only occurred once, we're done with it
-                    completed_post_offsets[freq_offs[0]] = len(search) + i
+                    completed_post_offsets[freq_offs[0]] = len(search) + i + 1
                 else:
                     # If there are multiples, we need to search further
                     assert len(freq_offs) > 1
@@ -165,16 +165,12 @@ def find_unique_contexts(data, offsets, prefix, find, suffix):
         context_post_i = completed_post_offsets[o]
         context_pre = data[o - context_pre_i : o + len(prefix)]
         search = data[o + len(prefix) : o + len(prefix) + len(find)]
-        context_post = data[
-            o + len(prefix) + len(find) : o + len(prefix) + len(find) + context_post_i
-        ]
+        context_post = data[o + len(prefix) + len(find) : o + context_post_i]
         assert (context_pre, search, context_post) not in contexts
         contexts.add((context_pre, search, context_post))
         assert (
             len(
-                find_all_occurrences(
-                    data, data[o - context_pre_i : o + context_post_i + 1]
-                )
+                find_all_occurrences(data, data[o - context_pre_i : o + context_post_i])
             )
             == 1
         )
